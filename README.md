@@ -82,37 +82,37 @@ This module bridges the gap allowing Terraform to create an EC2 Image Builder co
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
-| Name      | Version          |
-|-----------|------------------|
-| terraform | >= 0.12.28       |
-| aws       | >= 2.44, < 4.0.0 |
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.28 |
+| aws | >= 2.44, < 4.0.0 |
 
 ## Providers
 
-| Name | Version          |
-|------|------------------|
-| aws  | >= 2.44, < 4.0.0 |
+| Name | Version |
+|------|---------|
+| aws | >= 2.44, < 4.0.0 |
 
 ## Inputs
 
-| Name                    | Description                                                                        | Type          | Default   | Required |
-|-------------------------|------------------------------------------------------------------------------------|---------------|-----------|:--------:|
-| component\_version      | Version of the component                                                           | `string`      | n/a       |   yes    |
-| name                    | name to use for component                                                          | `string`      | n/a       |   yes    |
-| change\_description     | description of changes since last version                                          | `string`      | `null`    |    no    |
-| cloudformation\_timeout | How long to wait (in minutes) for CFN to apply before giving up                    | `number`      | `10`      |    no    |
-| data\_uri               | Use this to override the component document with one at a particualar URL endpoint | `string`      | `null`    |    no    |
-| description             | description of component                                                           | `string`      | `null`    |    no    |
-| kms\_key\_id            | KMS key to use for encryption                                                      | `string`      | `null`    |    no    |
-| platform                | platform of component (Linux or Windows)                                           | `string`      | `"Linux"` |    no    |
-| ssh\_key\_secret\_arn   | ARN of a secretsmanager secret containing an SSH key (use arn OR name, not both)   | `string`      | `null`    |    no    |
-| ssh\_key\_secret\_name  | Name of a secretsmanager secret containing an SSH key (use arn OR name, not both)  | `string`      | `null`    |    no    |
-| tags                    | map of tags to use for CFN stack and component                                     | `map(string)` | `{}`      |    no    |
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| component\_version | Version of the component | `string` | n/a | yes |
+| name | name to use for component | `string` | n/a | yes |
+| change\_description | description of changes since last version | `string` | `null` | no |
+| cloudformation\_timeout | How long to wait (in minutes) for CFN to apply before giving up | `number` | `10` | no |
+| data\_uri | Use this to override the component document with one at a particualar URL endpoint | `string` | `null` | no |
+| description | description of component | `string` | `null` | no |
+| kms\_key\_id | KMS key to use for encryption | `string` | `null` | no |
+| platform | platform of component (Linux or Windows) | `string` | `"Linux"` | no |
+| ssh\_key\_secret\_arn | ARN of a secretsmanager secret containing an SSH key (use arn OR name, not both) | `string` | `null` | no |
+| ssh\_key\_secret\_name | Name of a secretsmanager secret containing an SSH key (use arn OR name, not both) | `string` | `null` | no |
+| tags | map of tags to use for CFN stack and component | `map(string)` | `{}` | no |
 
 ## Outputs
 
-| Name           | Description                            |
-|----------------|----------------------------------------|
+| Name | Description |
+|------|-------------|
 | component\_arn | ARN of the EC2 Image Builder Component |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
