@@ -7,7 +7,8 @@ locals {
 }
 
 module "tags" {
-  source = "git::https://github.com/rhythmictech/terraform-terraform-tags.git?ref=v1.0.0"
+  source  = "rhythmictech/tags"
+  version = "~> 1.1.0"
 
   names = [
     "smiller",
