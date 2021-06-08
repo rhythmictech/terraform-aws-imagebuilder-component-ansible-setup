@@ -101,6 +101,7 @@ This module bridges the gap allowing Terraform to create an EC2 Image Builder co
 |------|-------------|------|---------|:--------:|
 | component\_version | Version of the component | `string` | n/a | yes |
 | name | name to use for component | `string` | n/a | yes |
+| additional\_packages | Space separated list of additional packages that may be needed for your ansible workflow | `string` | `""` | no |
 | change\_description | description of changes since last version | `string` | `null` | no |
 | cloudformation\_timeout | How long to wait (in minutes) for CFN to apply before giving up | `number` | `10` | no |
 | data\_uri | Use this to override the component document with one at a particualar URL endpoint | `string` | `null` | no |
