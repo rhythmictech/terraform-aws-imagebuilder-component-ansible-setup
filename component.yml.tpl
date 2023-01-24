@@ -15,4 +15,4 @@ phases:
             # Install Ansible
             - python3 -m venv ${ansible_venv_path}
             - source ${ansible_venv_path}/bin/activate
-            - yes | pip install ansible ${additional_pip_pkgs}
+            - pip install ansible ${additional_pip_pkgs}
