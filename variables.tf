@@ -1,6 +1,18 @@
 variable "additional_packages" {
   default     = ""
-  description = "Space separated list of additional packages that may be needed for your ansible workflow"
+  description = "Space separated list of additional yum packages that may be needed for your ansible workflow"
+  type        = string
+}
+
+variable "additional_pip_packages" {
+  default     = ""
+  description = "Space separated list of additional pip packages that may be needed for your ansible workflow"
+  type        = string
+}
+
+variable "ansible_venv_path" {
+  default     = "/var/tmp/ansible_venv/"
+  description = "Path at which to create the ansible virtual environment"
   type        = string
 }
 

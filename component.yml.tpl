@@ -12,8 +12,7 @@ phases:
           commands:
             # Install Ansible dependencies
             - sudo yum install -y python python3 python-pip python3-pip git ${additional_pkgs}
-            # Enable Ansible repository
-            - sudo amazon-linux-extras enable ansible2
             # Install Ansible
-            # TODO: #1 Enable version selection
-            - sudo yum install -y ansible
+            - python3 -m venv ${ansible_venv_path}
+            - source ${ansible_venv_path}/bin/activate
+            - yes | pip install ansible ${additional_pip_pkgs}

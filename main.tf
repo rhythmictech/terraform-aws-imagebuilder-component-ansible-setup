@@ -2,10 +2,12 @@ locals {
   has_ssh_key = var.ssh_key_secret_arn != null || var.ssh_key_secret_name != null
 
   data = templatefile("${path.module}/component.yml.tpl", {
-    additional_pkgs = var.additional_packages
-    description     = var.description
-    name            = var.name
-    ssh_key_name    = try(data.aws_secretsmanager_secret.ssh_key[0].name, null)
+    additional_pkgs     = var.additional_packages
+    additional_pip_pkgs = var.additional_pip_packages
+    ansible_venv_path   = var.ansible_venv_path
+    description         = var.description
+    name                = var.name
+    ssh_key_name        = try(data.aws_secretsmanager_secret.ssh_key[0].name, null)
   })
 }
 
@@ -30,6 +32,6 @@ resource "aws_imagebuilder_component" "this" {
 
   tags = merge(
     var.tags,
-    { Name : "${var.name}-stack" }
+    { Name : "${var.name}" }
   )
 }
