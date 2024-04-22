@@ -8,6 +8,7 @@ locals {
     description         = var.description
     name                = var.name
     ssh_key_name        = try(data.aws_secretsmanager_secret.ssh_key[0].name, null)
+    use_venv            = var.ansible_use_venv
   })
 }
 

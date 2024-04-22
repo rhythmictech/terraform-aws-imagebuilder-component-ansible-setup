@@ -13,6 +13,10 @@ phases:
             # Install Ansible dependencies
             - sudo yum install -y python python3 python-pip python3-pip git ${additional_pkgs}
             # Install Ansible
+%{ if use_venv ~}
             - python3 -m venv ${ansible_venv_path}
             - source ${ansible_venv_path}/bin/activate
             - pip install ansible ${additional_pip_pkgs}
+%{~ else ~}
+            - pip3 install ansible ${additional_pip_pkgs}
+%{~ endif ~}

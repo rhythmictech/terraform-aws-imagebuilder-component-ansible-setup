@@ -10,6 +10,12 @@ variable "additional_pip_packages" {
   type        = string
 }
 
+variable "ansible_use_venv" {
+  default     = true
+  description = "Whether or not ansible should be run in a virtual environment"
+  type        = bool
+}
+
 variable "ansible_venv_path" {
   default     = "/var/tmp/ansible_venv/"
   description = "Path at which to create the ansible virtual environment"
