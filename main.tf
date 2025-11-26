@@ -4,11 +4,11 @@ locals {
   data = templatefile("${path.module}/component.yml.tpl", {
     additional_pkgs     = var.additional_packages
     additional_pip_pkgs = var.additional_pip_packages
-    ansible_venv_path   = var.ansible_venv_path
+    ansible_pyenv_path  = var.ansible_pyenv_path
     description         = var.description
     name                = var.name
+    python_version      = var.python_version
     ssh_key_name        = try(data.aws_secretsmanager_secret.ssh_key[0].name, null)
-    use_venv            = var.ansible_use_venv
   })
 }
 
@@ -24,7 +24,7 @@ resource "aws_imagebuilder_component" "this" {
   version = var.component_version
 
   change_description    = var.change_description
-  data                  = var.data_uri == null ? local.data : null
+  data                  = var.data_uri == null ? local.data : ""
   description           = var.description
   kms_key_id            = var.kms_key_id
   platform              = var.platform

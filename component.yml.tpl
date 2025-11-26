@@ -11,12 +11,16 @@ phases:
         inputs:
           commands:
             # Install Ansible dependencies
-            - sudo yum install -y python python3 python-pip python3-pip git ${additional_pkgs}
+            - sudo yum install -y git gcc zlib-devel bzip2 bzip2-devel readline-devel openssl-devel tk-devel libffi-devel xz-devel ${additional_pkgs}
+            - curl -s -S -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer -o /var/tmp/pyenv-installer
+            - export PYENV_ROOT="${ansible_pyenv_path}"
+            - bash /var/tmp/pyenv-install
+            # Set up pyenv in current shell
+            - export PATH="$PYENV_ROOT/bin:$PATH"
+            - eval "$(pyenv init -)"
+            # Install desired Python version
+            - pyenv install ${python_version}
+            - pyenv global ${python_version}
+            - pyenv activate ${python_version}
             # Install Ansible
-%{ if use_venv ~}
-            - python3 -m venv ${ansible_venv_path}
-            - source ${ansible_venv_path}/bin/activate
             - pip install ansible ${additional_pip_pkgs}
-%{~ else ~}
-            - pip3 install ansible ${additional_pip_pkgs}
-%{~ endif ~}
