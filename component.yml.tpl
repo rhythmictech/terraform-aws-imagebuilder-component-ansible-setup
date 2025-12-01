@@ -14,7 +14,7 @@ phases:
             - sudo yum install -y git gcc zlib-devel bzip2 bzip2-devel readline-devel openssl-devel tk-devel libffi-devel xz-devel ${additional_pkgs}
             - curl -s -S -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer -o /var/tmp/pyenv-installer
             - export PYENV_ROOT="${ansible_pyenv_path}"
-            - bash /var/tmp/pyenv-install
+            - bash /var/tmp/pyenv-installer
             # Set up pyenv in current shell
             - export PATH="$PYENV_ROOT/bin:$PATH"
             - eval "$(pyenv init -)"
