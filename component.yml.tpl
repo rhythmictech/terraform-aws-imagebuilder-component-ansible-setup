@@ -21,6 +21,6 @@ phases:
             # Install desired Python version
             - pyenv install ${python_version}
             - pyenv global ${python_version}
-            - pyenv activate ${python_version}
+            - pyenv virtualenv ${python_version} ansible
             # Install Ansible
             - pip install ansible ${additional_pip_pkgs}
