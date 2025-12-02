@@ -1,7 +1,8 @@
 locals {
   has_ssh_key = var.ssh_key_secret_arn != null || var.ssh_key_secret_name != null
 
-  data = templatefile("${path.module}/component.yml.tpl", {
+  #TODO: use different templates for different linux versions
+  data = templatefile("${path.module}/component-al2.yml.tpl", {
     additional_pkgs     = var.additional_packages
     additional_pip_pkgs = var.additional_pip_packages
     ansible_pyenv_path  = var.ansible_pyenv_path
