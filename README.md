@@ -79,21 +79,36 @@ module "test_pipeline" {
 ```
 
 ## About
-This module serves as an EC2 Image Builder component to install Ansible on an Amazon Linux 2 image.
+This module serves as an EC2 Image Builder component to install Ansible on an Amazon Linux image.
+
+Set `os_distribution` to match the base image (`al2` is the default; `al2023`
+is also supported):
+
+```hcl
+module "component_ansible_setup" {
+  source  = "rhythmictech/imagebuilder-component-ansible-setup/aws"
+  version = "~> 3.1"
+
+  component_version = "1.0.0"
+  name              = "ansible-setup-al2023"
+  os_distribution   = "al2023"
+  tags              = local.tags
+}
+```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.14 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.22.0 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.53.0 |
+| ---- | ------- |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.50.0 |
 
 ## Modules
 
@@ -102,25 +117,26 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_imagebuilder_component.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/imagebuilder_component) | resource |
 | [aws_secretsmanager_secret.ssh_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/secretsmanager_secret) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_additional_packages"></a> [additional\_packages](#input\_additional\_packages) | Space separated list of additional yum packages that may be needed for your ansible workflow | `string` | `""` | no |
 | <a name="input_additional_pip_packages"></a> [additional\_pip\_packages](#input\_additional\_pip\_packages) | Space separated list of additional pip packages that may be needed for your ansible workflow | `string` | `""` | no |
-| <a name="input_ansible_use_venv"></a> [ansible\_use\_venv](#input\_ansible\_use\_venv) | Whether or not ansible should be run in a virtual environment | `bool` | `true` | no |
-| <a name="input_ansible_venv_path"></a> [ansible\_venv\_path](#input\_ansible\_venv\_path) | Path at which to create the ansible virtual environment | `string` | `"/var/tmp/ansible_venv/"` | no |
+| <a name="input_ansible_pyenv_path"></a> [ansible\_pyenv\_path](#input\_ansible\_pyenv\_path) | Path at which to create the ansible virtual environment | `string` | `"/var/tmp/ansible_pyenv"` | no |
 | <a name="input_change_description"></a> [change\_description](#input\_change\_description) | description of changes since last version | `string` | `null` | no |
 | <a name="input_component_version"></a> [component\_version](#input\_component\_version) | Version of the component | `string` | n/a | yes |
 | <a name="input_data_uri"></a> [data\_uri](#input\_data\_uri) | Use this to override the component document with one at a particualar URL endpoint | `string` | `null` | no |
 | <a name="input_description"></a> [description](#input\_description) | description of component | `string` | `null` | no |
 | <a name="input_kms_key_id"></a> [kms\_key\_id](#input\_kms\_key\_id) | KMS key to use for encryption | `string` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | name to use for component | `string` | n/a | yes |
+| <a name="input_os_distribution"></a> [os\_distribution](#input\_os\_distribution) | Base OS the component targets. Selects the package-install template (component-<os\_distribution>.yml.tpl). Supported: al2, al2023. | `string` | `"al2"` | no |
 | <a name="input_platform"></a> [platform](#input\_platform) | platform of component (Linux or Windows) | `string` | `"Linux"` | no |
+| <a name="input_python_version"></a> [python\_version](#input\_python\_version) | Version of python to install via pyenv for use with ansible | `string` | `"3.12"` | no |
 | <a name="input_ssh_key_secret_arn"></a> [ssh\_key\_secret\_arn](#input\_ssh\_key\_secret\_arn) | ARN of a secretsmanager secret containing an SSH key (use arn OR name, not both) | `string` | `null` | no |
 | <a name="input_ssh_key_secret_name"></a> [ssh\_key\_secret\_name](#input\_ssh\_key\_secret\_name) | Name of a secretsmanager secret containing an SSH key (use arn OR name, not both) | `string` | `null` | no |
 | <a name="input_supported_os_versions"></a> [supported\_os\_versions](#input\_supported\_os\_versions) | A set of operating system versions supported by the component. If the OS information is available, a prefix match is performed against the base image OS version during image recipe creation. | `set(string)` | `null` | no |
@@ -129,7 +145,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_component_arn"></a> [component\_arn](#output\_component\_arn) | ARN of the EC2 Image Builder Component |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
