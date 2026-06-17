@@ -50,6 +50,17 @@ variable "name" {
   type        = string
 }
 
+variable "os_distribution" {
+  default     = "al2"
+  description = "Base OS the component targets. Selects the package-install template (component-<os_distribution>.yml.tpl). Supported: al2, al2023."
+  type        = string
+
+  validation {
+    condition     = contains(["al2", "al2023"], var.os_distribution)
+    error_message = "os_distribution must be one of: al2, al2023."
+  }
+}
+
 # TODO: #2 add validation
 variable "platform" {
   default     = "Linux"
